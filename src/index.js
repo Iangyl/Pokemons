@@ -11,8 +11,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const temp = () => {};
-const store = createStore(/*reducer*/temp, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store={store}>
