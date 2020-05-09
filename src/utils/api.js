@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://5e85e2d544467600161c69cf.mockapi.io/api/';
+const url = 'https://pokeapi.co/api/v2/';
 
 export default function api(path) {
     const result = axios.get(`${url}${path}`)
