@@ -1,0 +1,16 @@
+li{
+    display: flex;
+    width: 100%;
+    .img-box{
+        img{
+            width: 32px;
+        }
+    }
+    .name-box{
+        font-family: 'Roboto';
+        font-size: 14pt;
+        align-self: center;
+        width: auto;
+        margin-left: 10px;
+    }
+}
