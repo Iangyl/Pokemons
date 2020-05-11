@@ -1,11 +1,17 @@
 import React from 'react';
 import './App.scss';
+import api from './utils/api';
 
 import SearchInput from './components/Search/searchInput';
 import PokeList from './components/List/pokeList';
 import InformBlock from './components/Article/informBlock';
 
 class App extends React.Component {
+
+  componentDidMount() {
+    api('pokemon').then((res) => console.log(res.data));
+  }
+
   render(){
     return(
       <div className='wrapper'>
