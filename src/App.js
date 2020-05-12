@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.scss';
 import { connect } from 'react-redux';
-import api from './utils/api';
+import axios from 'axios';
 
 import SearchInput from './components/Search/searchInput';
 import PokeList from './components/List/pokeList';
@@ -9,9 +9,10 @@ import InformBlock from './components/Article/informBlock';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    //api('pokemon').then((res) => console.log(res.data));
-    api('pokemon').then((res) => this.props.onGetData(res.data));
+  async componentDidMount() {
+    //console.log(this.props.url);
+    const res = await axios.get(this.props.url);
+    this.props.onGetData(res.data['results']);
   }
 
   render(){
@@ -48,7 +49,9 @@ class App extends React.Component {
 }
 
 export default connect(
-  null,
+  state => ({
+    url: state.pokemons.url,
+  }),
   dispatch => ({
     onGetData: (data) => {
       dispatch({
