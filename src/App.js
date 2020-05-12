@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import { connect } from 'react-redux';
 import api from './utils/api';
 
 import SearchInput from './components/Search/searchInput';
@@ -9,7 +10,8 @@ import InformBlock from './components/Article/informBlock';
 class App extends React.Component {
 
   componentDidMount() {
-    api('pokemon').then((res) => console.log(res.data));
+    //api('pokemon').then((res) => console.log(res.data));
+    api('pokemon').then((res) => this.props.onGetData(res.data));
   }
 
   render(){
@@ -45,4 +47,14 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  dispatch => ({
+    onGetData: (data) => {
+      dispatch({
+        type: 'GET_DATA',
+        payload: data,
+      });
+    },
+  }),
+)(App);
