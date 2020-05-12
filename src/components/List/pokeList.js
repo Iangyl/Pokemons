@@ -6,12 +6,19 @@ import { connect } from 'react-redux';
 
 class PokeList extends React.Component{
     render(){
-        //console.log(this.props.pokemon);
+        console.log(this.props.pokemonName);
         return(
             <div className='listBox'>
                 <ul id='list'>
                    {
-
+                        this.props.pokemonName.map(item => {
+                            return (
+                                <PokeItems 
+                                    key={item.name}
+                                    name={item.name}
+                                />
+                            );
+                        })
                    }
                 </ul>
             </div>
@@ -21,7 +28,7 @@ class PokeList extends React.Component{
 
 export default connect(
     state => ({
-        pokemon: state.pokemons.items
+        pokemonName: state.pokemons.pokemon,
     }),
     null,
 )(PokeList);
