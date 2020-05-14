@@ -12,7 +12,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "sass": "^1.26.5"
+    "sass": "^1.26.5",
+    "uuid": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
