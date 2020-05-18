@@ -17,6 +17,7 @@ class PokeList extends React.Component{
                                     <PokeItems 
                                         key={item.id}
                                         name={item.name}
+                                        url={item.url}
                                     />
                                 );
                             })
