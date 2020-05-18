@@ -11,7 +11,7 @@ class PokeList extends React.Component{
             <div className='listBox'>
                 <ul id='list'>
                    {
-                        (typeof this.props.pokemonName === undefined) ? ( 
+                        (this.props.pokemonName) ? ( 
                             this.props.pokemonName.map(item => {
                                 return (
                                     <PokeItems 
@@ -35,7 +35,7 @@ class PokeList extends React.Component{
 
 export default connect(
     state => ({
-        pokemonName: state.pokemons,
+        pokemonName: state.pokemons.pokemon,
     }),
     null,
 )(PokeList);

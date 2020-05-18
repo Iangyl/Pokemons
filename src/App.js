@@ -13,6 +13,7 @@ class App extends React.Component {
     //console.log(this.props.url);
     const res = await axios.get(this.props.url);
     this.props.onGetData(res.data['results']);
+    console.log(this.props.general);
   }
 
   render(){
@@ -51,6 +52,7 @@ class App extends React.Component {
 export default connect(
   state => ({
     url: state.pokemons.url,
+    general: state.pokemons,
   }),
   dispatch => ({
     onGetData: (data) => {
