@@ -3,16 +3,16 @@ import './style.scss';
 
 class PokeItems extends React.Component{
     componentDidMount(){
-        const {key, name, url} = this.props;
-        const pokemonIndex = url.split('/')[url.split('/').length - 2];
-        //const pokemonImg = `https://github.com/PokeAPI/sprits/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
+        const {id, name, url} = this.props;
+        const pokemonIndex = (url) ? url.split('/')[url.split('/').length - 2] : '1';
+        const pokemonImg = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
     }
 
     render(){
         
         return(
-            <li key={this.props.key}>
-                <div className='img-box'><img src={require('../../../assets/pictures/pokeball.png')} alt='pika4u.png' id='foot-logo' /></div>
+            <li key={this.props.id}>
+                <div className='img-box'><img src={this.props.pokemonImg} alt='pika4u.png' id='foot-logo' /></div>
                 <div className='name-box'>{this.props.name}</div>
             </li>
         )
