@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 class PokeList extends React.Component{
     render(){
-        console.log(this.props.pokemonName)
         return(
             <div className='listBox'>
                 <ul id='list'>
