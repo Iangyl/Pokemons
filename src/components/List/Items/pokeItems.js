@@ -5,12 +5,15 @@ class PokeItems extends React.Component{
     state = {
         imgLoad: true,
         requestErr: false,
+        pokemonImg: '',
+        pokemonIndex: '',
     }
     
     componentDidMount(){
         const {id, name, url} = this.props;
         const pokemonIndex = (url) ? url.split('/')[url.split('/').length - 2] : '1';
-        const pokemonImg = `https://github.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
+        const pokemonImg = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
+        this.setState({ pokemonImg, pokemonIndex });
     }
 
     render(){
@@ -19,7 +22,7 @@ class PokeItems extends React.Component{
             <li key={this.props.id}>
                 <div className='img-box'>
                     <img
-                        src={this.props.pokemonImg} alt='pika4u'
+                        src={this.state.pokemonImg} alt='pika4u'
                         onLoad={() => this.setState({imgLoad: false})}
                         onError={() => this.setState({requestErr: true})}
                     />

@@ -5,7 +5,7 @@ li{
     padding: 20px 0 20px 15px;
     .img-box{
         img{
-            width: 32px;
+            width: 72px;
         }
     }
     .name-box{
@@ -14,5 +14,8 @@ li{
         align-self: center;
         width: auto;
         margin-left: 10px;
+    }
+    &:hover{
+        background-color: #ffde4a8e;
     }
 }

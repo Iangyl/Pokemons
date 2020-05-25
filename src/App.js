@@ -28,7 +28,7 @@ class App extends React.Component {
               <div className='searchContainer'>
                 <SearchInput />,
               </div>
-              <PokeList />,
+              <PokeList />
             </div>
             <InformBlock />,
           </div>
