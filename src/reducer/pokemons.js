@@ -11,7 +11,11 @@ export default function Pokemons(state = initialState, {type, payload}){
                 ...state,
                 pokemon: payload.map(item => { item.id = uuid(); return item}),
             }
-        
+        case 'POKEMON_DEV_INF':
+            return {
+                ...state,
+                pokemonBlock: payload,
+            }
     }
     return state;
 }

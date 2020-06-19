@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.scss';
+import { connect } from 'react-redux';
 
 class PokeItems extends React.Component{   
     state = {
@@ -16,10 +17,22 @@ class PokeItems extends React.Component{
         this.setState({ pokemonImg, pokemonIndex });
     }
 
+    getPokeBlock = () => {
+        const pokeImg = (typeof this.state.pokemonImg == undefined) ? '1' : this.state.pokemonImg;
+        const pokeUrl = this.props.url;
+        const pokeIndex = this.state.pokemonIndex;
+        const pokeName = this.props.name.split(' ').map(letter => letter.charAt(0).toUpperCase() + letter.substring(1)).join();
+        this.props.onPokeBlockInfDirect({
+            pokeImg: pokeImg,
+            pokeUrl: pokeUrl,
+            pokeIndex: pokeIndex,
+            pokeName: pokeName,
+        });
+    }
+
     render(){
-        
         return(
-            <li key={this.props.id}>
+            <li key={this.props.id} onClick={this.getPokeBlock}>
                 <div className='img-box'>
                     <img
                         src={this.state.pokemonImg} alt='pika4u'
@@ -35,4 +48,16 @@ class PokeItems extends React.Component{
     }
 }
 
-export default PokeItems;
+export default connect(
+    state => ({
+        
+    }),
+    dispatch => ({
+        onPokeBlockInfDirect: (data) => {
+            dispatch({
+                type: 'POKEMON_DEV_INF',
+                payload: data,
+            });
+        },
+    })
+)(PokeItems);

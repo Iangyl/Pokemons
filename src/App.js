@@ -10,7 +10,6 @@ import InformBlock from './components/Article/informBlock';
 class App extends React.Component {
 
   async componentDidMount() {
-    //console.log(this.props.url);
     const res = await axios.get(this.props.url);
     this.props.onGetData(res.data['results']);
     console.log(this.props.general);
