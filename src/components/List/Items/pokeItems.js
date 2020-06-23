@@ -18,15 +18,11 @@ class PokeItems extends React.Component{
     }
 
     getPokeBlock = () => {
-        const pokeImg = (typeof this.state.pokemonImg == undefined) ? '1' : this.state.pokemonImg;
-        const pokeUrl = this.props.url;
-        const pokeIndex = this.state.pokemonIndex;
-        const pokeName = this.props.name.split(' ').map(letter => letter.charAt(0).toUpperCase() + letter.substring(1)).join();
         this.props.onPokeBlockInfDirect({
-            pokeImg: pokeImg,
-            pokeUrl: pokeUrl,
-            pokeIndex: pokeIndex,
-            pokeName: pokeName,
+            pokeImg: this.state.pokemonImg,
+            pokeUrl: this.props.url,
+            pokeIndex: this.state.pokemonIndex,
+            pokeName: this.props.name.split(' ').map(letter => letter.charAt(0).toUpperCase() + letter.substring(1)).join(),
         });
     }
 
@@ -49,9 +45,7 @@ class PokeItems extends React.Component{
 }
 
 export default connect(
-    state => ({
-        
-    }),
+    null,
     dispatch => ({
         onPokeBlockInfDirect: (data) => {
             dispatch({
