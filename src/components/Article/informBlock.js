@@ -36,6 +36,7 @@ class InformBlock extends React.Component{
         //get poke info
 
         const pokemonRes = await axios.get(pokemonUrl);
+        
         let { hp, attack, defense, speed, specialAttack, specialDefense } = '';
 
         pokemonRes.data.stats.map(stat => {
@@ -61,11 +62,10 @@ class InformBlock extends React.Component{
             }
         })
         
-        //converte dm to feet... The + 0.0001 * 100) / 100 is for rounding to 2 decimal places
-        const height = Math.round((pokemonRes.data.height * 0.328084 + 0.0001 * 100) / 100);
-
-        //convert to ibs
-        const weight = Math.round((pokemonRes.data.weight * 0.220462 + 0.0001 * 100) / 100);
+        //converte dm to metres
+        const height = parseFloat((pokemonRes.data.height * 0.1).toFixed(2));
+        //convert to kg
+        const weight = parseFloat((pokemonRes.data.weight * 0.1).toFixed(2));
 
         const types = pokemonRes.data.types.map(type => type.type.name);
 
@@ -88,7 +88,56 @@ class InformBlock extends React.Component{
                 .join(' ');
         }).join(', ');
 
-        //get pokemon desicision
+        //get pokemon description, catch rate, egg groups, gender ration, hatch steps
+
+        await axios.get(pokemonSpeciesUrl).then(res => {
+            let description = '';
+            res.data.flavor_text_entries.some(flavor => {
+                if (flavor.language.name === 'en') {
+                    description = flavor.flavor_text;
+                    return;
+                }
+            });
+
+            const femaleRate = res.data['gender_rate'];
+            const genderRatioFemale = 12.5 * femaleRate;
+            const genderRatioMale = 12.5 * (8 - femaleRate);
+
+            const catchRate = Math.round((100 / 255) * res.data['capture_rate']);
+
+            const eggGroups = res.data['egg_groups'].map(group => {
+                return group.name.toLowerCase()
+                .split(' ')
+                .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
+            }).join(", ");
+
+            const hatchSteps = 255 * (res.data['hatch_counter'] + 1);
+            
+            this.setState({
+                description,
+                genderRatioFemale,
+                genderRatioMale,
+                catchRate,
+                eggGroups,
+                hatchSteps,
+            });
+            this.setState({
+                types,
+                stats: {
+                    hp,
+                    attack,
+                    defense,
+                    speed,
+                    specialAttack,
+                    specialDefense,
+                },
+                height,
+                weight,
+                abilities,
+                evs,
+            })
+        })
 
         
     }
