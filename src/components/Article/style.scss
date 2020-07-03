@@ -2,6 +2,7 @@
     text-align: center;
     h1{
         font-family: 'Roboto';
+        margin: 0;
         margin-top: 100px;
         font-size: 32pt;
     }
@@ -19,16 +20,20 @@
     font-size: 12pt;
     font-weight: 500;
     color: white;
+    padding: 14px;
     .item-type{
         padding: 14px;
         background-color: black;
         border-radius: 20px;
-        margin-left: 5px;
+        margin-left: 12px;
     }
 }
 .stats-blc{
+    margin-top: 40px;
+    margin-left: 35px;
     div{
-        margin-left: 35px;
+        display: flex;
+        justify-content: space-around;
         .stat-text{
             font-family: 'Roboto';
             font-size: 16pt;
@@ -36,9 +41,11 @@
             color: black;
         }
         .stat-field{
+            display: block;
             max-width: 500px;
             width: 100%;
             .stat-line{
+                float: left;
                 background-color: rgb(50, 180, 255);
             }
         }

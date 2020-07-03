@@ -179,10 +179,18 @@ class InformBlock extends React.Component{
                         }
                     ) }
                 </div>
-                <div className='stats-blc'>
-                        <div>
-                            <div className='stat-text'>Hp:</div>
-                            <div className='stat-field'><div className='stats-line'></div></div>
+                <div className='row align-items-center'>
+                        <div className='col-12 col-md-3'>HP</div>
+                        <div className='col-12 col-md-9'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{width: `${this.state.stats.hp}%`}}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                </div>
+                            </div>
                         </div>
                 </div>
             </div>
