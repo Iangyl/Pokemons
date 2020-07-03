@@ -151,6 +151,35 @@ class InformBlock extends React.Component{
                 <div className='img-blc'>
                     <img className='img-main' src={ this.props.pokeCreatureImg } alt='pika4u.png' id='foot-logo' />
                 </div>
+                <div className='block-type'>
+                    { this.state.types.map(type => 
+                        {
+                            let color;
+                            if (type == 'bug') color = '#3b994e';
+                            else if (type == 'grass') color = '#26CC4D';
+                            else if (type == 'dark') color = '#5A5979';
+                            else if (type == 'dragon') color = '#60CBD7';
+                            else if (type == 'electric') color = '#FBFB6F';
+                            else if (type == 'fairy') color = '#EA1369';
+                            else if (type == 'fighting') color = '#F06138';
+                            else if (type == 'fire') color = '#FD4C5A';
+                            else if (type == 'flying') color = '#93B2C7';
+                            else if (type == 'ghost') color = '#906790';
+                            else if (type == 'ground') color = '#6E491F';
+                            else if (type == 'ice') color = '#D8F0FA';
+                            else if (type == 'normal') color = '#CB97A7';
+                            else if (type == 'poison') color = '#9B69D9';
+                            else if (type == 'physhic') color = '#F81C91';
+                            else if (type == 'rock') color = '#8B3E21';
+                            else if (type == 'steel') color = '#42BE92';
+                            else if (type == 'water') color = '#86A8FC';
+    
+                            return <span key={type} className='item-type' style={{backgroundColor: color}}>
+                                {type.split(' ').map(letter => letter.charAt(0).toUpperCase() + letter.substring(1)).join() }
+                            </span> 
+                        }
+                    ) }
+                </div>
                 <div className='stats-blc'>
                 
                 </div>

@@ -13,3 +13,16 @@
 .img-main{
     width: 250px;
 }
+.block-type{
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 12pt;
+    font-weight: 500;
+    color: white;
+    .item-type{
+        padding: 14px;
+        background-color: black;
+        border-radius: 20px;
+        margin-left: 5px;
+    }
+}
