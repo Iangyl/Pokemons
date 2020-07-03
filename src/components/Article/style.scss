@@ -31,23 +31,12 @@
 .stats-blc{
     margin-top: 40px;
     margin-left: 35px;
-    div{
-        display: flex;
-        justify-content: space-around;
-        .stat-text{
-            font-family: 'Roboto';
-            font-size: 16pt;
-            font-weight: 600;
-            color: black;
-        }
-        .stat-field{
-            display: block;
-            max-width: 500px;
-            width: 100%;
-            .stat-line{
-                float: left;
-                background-color: rgb(50, 180, 255);
-            }
-        }
+    font-family: 'Roboto';
+    .stats-text{
+        margin-left: 35px;
+        font-size: 14pt;
+    }
+    small{
+        font-size: 10pt;
     }
 }

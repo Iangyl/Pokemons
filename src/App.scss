@@ -2,7 +2,7 @@
     overflow: hidden;
     background-image: url(./assets/pictures/pokemons-bg-big1-reforged.jpg);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-attachment: fixed;
 }
 .content{
@@ -35,9 +35,11 @@
     }
 }
 .searchContainer{
-    display: flex;
     background-color: #c200fb;
-    align-items: center;
+    text-align: center;
+    height: auto;
+    max-width: 400px;
+    width: 100%;
 }
 .footer{
     background-color: #F4B393;

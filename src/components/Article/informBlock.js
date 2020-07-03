@@ -179,19 +179,103 @@ class InformBlock extends React.Component{
                         }
                     ) }
                 </div>
-                <div className='row align-items-center'>
-                        <div className='col-12 col-md-3'>HP</div>
-                        <div className='col-12 col-md-9'>
+                <div className='stats-blc'>
+                    {/*HP*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>HP</div>
+                        <div className='col-12 col-md-7'>
                             <div className='progress'>
                                 <div className='progress-bar'
                                     role='progressBar'
-                                    style={{width: `${this.state.stats.hp}%`}}
+                                    style={{ width: `${this.state.stats.hp}%` }}
                                     aria-valuenow='25'
                                     aria-valuemin='0'
                                     aria-valuemax='100'>
+                                    <small>{`${this.state.stats.hp}%`}</small>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    {/*Attack*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>Attack</div>
+                        <div className='col-12 col-md-7'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{ width: `${this.state.stats.attack}%` }}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                    <small>{`${this.state.stats.attack}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*Defense*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>Defense</div>
+                        <div className='col-12 col-md-7'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{ width: `${this.state.stats.defense}%` }}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                    <small>{`${this.state.stats.defense}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*Speed*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>Speed</div>
+                        <div className='col-12 col-md-7'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{ width: `${this.state.stats.speed}%` }}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                    <small>{`${this.state.stats.speed}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*Special Attack*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>Special Attack</div>
+                        <div className='col-12 col-md-7'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{ width: `${this.state.stats.specialAttack}%` }}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                    <small>{`${this.state.stats.specialAttack}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*Special Defense*/}
+                    <div className='row align-items-center'>
+                        <div className='col-12 col-md-3 stats-text'>Special Defense</div>
+                        <div className='col-12 col-md-7'>
+                            <div className='progress'>
+                                <div className='progress-bar'
+                                    role='progressBar'
+                                    style={{ width: `${this.state.stats.specialDefense}%` }}
+                                    aria-valuenow='25'
+                                    aria-valuemin='0'
+                                    aria-valuemax='100'>
+                                    <small>{`${this.state.stats.specialDefense}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
