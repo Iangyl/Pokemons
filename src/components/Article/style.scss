@@ -26,3 +26,21 @@
         margin-left: 5px;
     }
 }
+.stats-blc{
+    div{
+        margin-left: 35px;
+        .stat-text{
+            font-family: 'Roboto';
+            font-size: 16pt;
+            font-weight: 600;
+            color: black;
+        }
+        .stat-field{
+            max-width: 500px;
+            width: 100%;
+            .stat-line{
+                background-color: rgb(50, 180, 255);
+            }
+        }
+    }
+}
