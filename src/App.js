@@ -12,7 +12,6 @@ class App extends React.Component {
   async componentDidMount() {
     const res = await axios.get(this.props.url);
     this.props.onGetData(res.data['results']);
-    console.log(this.props.general);
   }
 
   render(){
@@ -25,11 +24,11 @@ class App extends React.Component {
           <div className='section'>
             <div className='nav'>
               <div className='searchContainer'>
-                <SearchInput />,
+                <SearchInput />
               </div>
               <PokeList />
             </div>
-            <InformBlock />,
+            <InformBlock />
           </div>
           <footer className='footer'>
             <div className='foot-1'>

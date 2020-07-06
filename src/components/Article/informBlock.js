@@ -29,14 +29,13 @@ class InformBlock extends React.Component{
     async componentDidMount(){
 
         //url`s for pokemons info
-
         const pokemonUrl = this.props.pokeCreatureUrl;
         const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${this.props.pokeCreatureIndex}/`;
 
         //get poke info
 
         const pokemonRes = await axios.get(pokemonUrl);
-        
+        console.log(pokemonRes);
         let { hp, attack, defense, speed, specialAttack, specialDefense } = '';
 
         pokemonRes.data.stats.map(stat => {
@@ -81,11 +80,11 @@ class InformBlock extends React.Component{
             if (stat.effort > 0) return true;
             return false;
         }).map(stat => {
-            return `${stat.effort} ${stat.stat.name}`
+            return `${stat.effort} ${stat.stat.name
                 .toLowerCase()
                 .split('-')
                 .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
+                .join(' ')}`
         }).join(', ');
 
         //get pokemon description, catch rate, egg groups, gender ration, hatch steps
@@ -272,6 +271,108 @@ class InformBlock extends React.Component{
                                     aria-valuemin='0'
                                     aria-valuemax='100'>
                                     <small>{`${this.state.stats.specialDefense}%`}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='row mt-1'>
+                    <div className='col'>
+                        <p className='desc-blc'>{this.state.description}</p>
+                    </div>
+                </div>
+                <hr />
+                <div className='profile'>
+                    <h5 className='profile-title text-center'>Profile</h5>
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Height:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.height} m.</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Weight:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.weight} kg.</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Catch Rate:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.catchRate} %</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Gender Ratio:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <div className='progress'>
+                                        <div className='progress-bar'
+                                            role='progressBar'
+                                            style={{
+                                                width: `${this.state.genderRatioFemale}%`,
+                                                backgroundColor: 'red'
+                                            }}
+                                            aria-valuenow='15'
+                                            aria-valuemin='0'
+                                            aria-valuemax='100'>
+                                            <small>{this.state.genderRatioFemale}</small>
+                                        </div>
+                                        <div className='progress-bar'
+                                            role='progressBar'
+                                            style={{
+                                                width: `${this.state.genderRatioMale}%`,
+                                                backgroundColor: 'blue'
+                                            }}
+                                            aria-valuenow='30'
+                                            aria-valuemin='0'
+                                            aria-valuemax='100'>
+                                            <small>{this.state.genderRatioMale}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-md-6'>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Egg Groups:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.eggGroups}</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Hatch Steps:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.hatchSteps}</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>Abilities:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.abilities}</h6>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className='col-md-5'>
+                                    <h6 className='float-right'>EVs:</h6>
+                                </div>
+                                <div className='col-md-5'>
+                                    <h6 className='float-left'>{this.state.evs}</h6>
                                 </div>
                             </div>
                         </div>
