@@ -62,10 +62,17 @@
         font-size: 16pt;
         div{
             float: right;
-            margin: 10px 20px 10px 20px;
+            
             #foot-logo{
                 width: 64px;
                 height: auto;
+                margin: 10px 20px 10px 20px;
+            }
+        }
+        #footer-text{
+            margin-top: 25px;
+            p{
+                margin: 0;
             }
         }
     }

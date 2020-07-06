@@ -39,7 +39,7 @@ class App extends React.Component {
             </div>
             <div className='foot-2'>
               <div><img src={require('./assets/pictures/pika-avatar.png')} alt='pika4u.png' id='foot-logo' /></div>
-              <div><p>POKEMON.GO</p></div>
+              <div id='footer-text'><p>POKEMON.GO</p></div>
             </div>
           </footer>
         </div>
