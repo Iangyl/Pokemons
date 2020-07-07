@@ -9,9 +9,12 @@ class PokeList extends React.Component{
         return(
             <div className='listBox'>
                 <ul id='list'>
-                   {
+                    {
+                        console.log('Array ',this.props.pokemonName),
+                        console.log('Word ',this.props.searchStr),
                         (this.props.pokemonName) ? ( 
-                            this.props.pokemonName.map(item => {
+                            this.props.pokemonName.filter(creature => creature.name ? creature.name.includes(this.props.searchStr) : creature.name)
+                            .map(item => {
                                 return (
                                     <PokeItems 
                                         key={item.id}
@@ -36,6 +39,7 @@ class PokeList extends React.Component{
 export default connect(
     state => ({
         pokemonName: state.pokemons.pokemon,
+        searchStr: state.pokemons.searchWord,
     }),
     null,
 )(PokeList);

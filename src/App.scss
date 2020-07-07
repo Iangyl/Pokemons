@@ -26,6 +26,8 @@
 .section{
     display: flex;
     .nav{
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 400px;
     }
@@ -37,7 +39,7 @@
 .searchContainer{
     background-color: #c200fb;
     text-align: center;
-    height: auto;
+    height: 55px;
     max-width: 400px;
     width: 100%;
 }
