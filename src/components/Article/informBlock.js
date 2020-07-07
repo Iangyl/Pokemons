@@ -26,8 +26,22 @@ class InformBlock extends React.Component{
         hatchSteps: '',
     };
 
-    async componentDidMount(){
+   /*  static getDerivedStateFromProps = () => {
+        console.log("willUpdate");
+        console.log(typeof this.props.pokeCreatureUrl);
+        const pokemonUrl = this.props.pokeCreatureUrl;
+        const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${this.props.pokeCreatureIndex}/`;
 
+        this.setState({pokemonUrl, pokemonSpeciesUrl});
+        console.log("willUpdate");
+    } */
+    componentDidUpdate(prevProps) {
+        if (this.props.pokeCreatureUrl !== prevProps.pokeCreatureUrl) {
+            this.getPokemonInfo();
+        }
+    }
+
+    async getPokemonInfo(){
         //url`s for pokemons info
         const pokemonUrl = this.props.pokeCreatureUrl;
         const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${this.props.pokeCreatureIndex}/`;
@@ -35,11 +49,10 @@ class InformBlock extends React.Component{
         //get poke info
 
         const pokemonRes = await axios.get(pokemonUrl);
-        console.log(pokemonRes);
         let { hp, attack, defense, speed, specialAttack, specialDefense } = '';
 
         pokemonRes.data.stats.map(stat => {
-            switch (stat.stat.name){
+            switch (stat.stat.name) {
                 case 'hp':
                     hp = stat['base_stat'];
                     break;
@@ -60,7 +73,7 @@ class InformBlock extends React.Component{
                     break;
             }
         })
-        
+
         //converte dm to metres
         const height = parseFloat((pokemonRes.data.height * 0.1).toFixed(2));
         //convert to kg
@@ -70,10 +83,10 @@ class InformBlock extends React.Component{
 
         const abilities = pokemonRes.data.abilities.map(ability => {
             return ability.ability.name
-            .toLowerCase()
-            .split('-')
-            .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-            .join(' ');
+                .toLowerCase()
+                .split('-')
+                .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                .join(' ');
         })
 
         const evs = pokemonRes.data.stats.filter(stat => {
@@ -106,13 +119,13 @@ class InformBlock extends React.Component{
 
             const eggGroups = res.data['egg_groups'].map(group => {
                 return group.name.toLowerCase()
-                .split(' ')
-                .map(s => s.charAt(0).toUpperCase() + s.substring(1))
-                .join(' ');
+                    .split(' ')
+                    .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                    .join(' ');
             }).join(", ");
 
             const hatchSteps = 255 * (res.data['hatch_counter'] + 1);
-            
+
             this.setState({
                 description,
                 genderRatioFemale,
@@ -138,7 +151,11 @@ class InformBlock extends React.Component{
             })
         })
 
-        
+
+    }
+
+    componentDidMount(){
+       this.getPokemonInfo();
     }
 
     render(){

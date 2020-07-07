@@ -22,6 +22,11 @@ export default function Pokemons(state = initialState, {type, payload}){
                 ...state,
                 pokemonBlock: payload,
             }
+        case 'GET_SEARCH_STRING':
+            return {
+                ...state,
+                searchWord: payload,
+            }
     }
     return state;
 }
