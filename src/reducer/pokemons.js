@@ -7,8 +7,8 @@ const initialState = {
         pokeImg: "https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/1.png?raw=true",
         pokeUrl: "https://pokeapi.co/api/v2/pokemon/1/",
         pokeIndex: "1",
-        searchWord: '',
-    }
+    },
+    searchWord: '',
 };
 
 export default function Pokemons(state = initialState, {type, payload}){

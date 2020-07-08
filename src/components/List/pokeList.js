@@ -13,7 +13,7 @@ class PokeList extends React.Component{
                         console.log('Array ',this.props.pokemonName),
                         console.log('Word ',this.props.searchStr),
                         (this.props.pokemonName) ? ( 
-                            this.props.pokemonName.filter(creature => creature.name ? creature.name.includes(this.props.searchStr) : creature.name)
+                            this.props.pokemonName.filter(creature => creature.name.includes(this.props.searchStr))
                             .map(item => {
                                 return (
                                     <PokeItems 
