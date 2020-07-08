@@ -2,6 +2,7 @@ import React from 'react';
 import './style.scss';
 
 import PokeItems from './Items/pokeItems';
+import Pagination from './../Pagination/pagination';
 import { connect } from 'react-redux';
 
 class PokeList extends React.Component{
@@ -31,6 +32,7 @@ class PokeList extends React.Component{
                         )
                    }
                 </ul>
+                {/*<Pagination / >,*/}
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import { v1 as uuid } from "uuid"; 
 
 const initialState = {
-    url: 'https://pokeapi.co/api/v2/pokemon/',
+    url: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=9',//offset - с какого эл-та начинается список, limit - кол-во э-тов в списке
     pokemonBlock: {
         pokeName: 'Bulbasaur',
         pokeImg: "https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/1.png?raw=true",
