@@ -1,11 +1,12 @@
 import React from 'react';
 import './style.scss';
 import { connect } from 'react-redux';
+import spinner from '../../../assets/spinner.gif';
 
 class PokeItems extends React.Component{   
     state = {
         imgLoad: true,
-        requestErr: false,
+        tooManyRequest: false,
         pokemonImg: '',
         pokemonIndex: '',
     }
@@ -30,10 +31,19 @@ class PokeItems extends React.Component{
         return(
             <li key={this.props.id} onClick={this.getPokeBlock}>
                 <div className='img-box'>
+                    {
+                        this.state.imgLoad ? (
+                            <img src={spinner} style={{width: '72px'}}></img>
+                        ) : null
+                    }
                     <img
                         src={this.state.pokemonImg} alt='pika4u'
                         onLoad={() => this.setState({imgLoad: false})}
-                        onError={() => this.setState({requestErr: true})}
+                        onError={() => this.setState({tooManyRequest: true})}
+                        style={
+                            this.state.tooManyRequest ? {display: 'none'} : 
+                            this.state.imgLoad ? null : {display: 'block'}
+                        }
                     />
                 </div>
                 <div className='name-box'>
