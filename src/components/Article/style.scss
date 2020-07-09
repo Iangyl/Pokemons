@@ -1,5 +1,5 @@
 @mixin commonText(){
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Mandy's Sketch";
     font-size: 14pt;
     font-weight: 400;
 }
@@ -9,7 +9,7 @@ p{
 .title-blc{
     text-align: center;
     h1{
-        font-family: 'Roboto';
+        font-family: "Mandy's Sketch";
         margin: 0;
         margin-top: 100px;
         font-size: 32pt;
@@ -39,7 +39,7 @@ p{
 .stats-blc{
     margin-top: 40px;
     margin-left: 35px;
-    font-family: 'Roboto';
+    font-family: "Mandy's Sketch";
     .stats-text{
         margin-left: 35px;
         font-size: 14pt;
@@ -52,4 +52,7 @@ p{
     @include commonText();
     padding: 18px;
     margin: 0;
+}
+div{
+    font-family: "Mandy's Sketch";
 }

@@ -32,7 +32,7 @@ class PokeList extends React.Component{
                         )
                    }
                 </ul>
-                {/*<Pagination / >,*/}
+                <Pagination />
             </div>
         )
     }
