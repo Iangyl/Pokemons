@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import './style.scss';
 
 class Pagination extends React.Component{
-    reCount(){
+    componentDidUpdate(){
         console.log(this.props.currentPage);
+        console.log(this.props.checkOnFirstPage);
         const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
         const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
         const currentPosts = this.props.pokemons ? this.props.pokemons.slice(indexOfFirstPost, indexOfLastPost) : this.props.pokemons;
@@ -13,30 +14,27 @@ class Pagination extends React.Component{
         this.props.onCurrentPosts(currentPosts);
     }
     nextPage = () => {
+        console.log('func done')
         const currPage = this.props.currentPage;
         const nextPage = currPage + 1;
         this.props.onChangePage(nextPage);
         this.props.onFirstCheckPage(false);
-        this.reCount();
     }
     prevPage = () => {
         const prevPage = this.props.currentPage - 1;
         this.props.onChangePage(prevPage);
         if((prevPage - 1) === 0) this.props.onFirstCheckPage(true);
         if((prevPage + 1) === 108) this.props.onLastCheckPage(true);
-        this.reCount();
     }
     startPage = () => {
         this.props.onChangePage(1);
         this.props.onFirstCheckPage(true);
         this.props.onLastCheckPage(false);
-        this.reCount();
     }
     lastPage = () => {
         this.props.onChangePage(108);
         this.props.onLastCheckPage(true);
         this.props.onFirstCheckPage(false);
-        this.reCount();
     }
     render(){
         return(
