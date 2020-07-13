@@ -9,9 +9,17 @@ import InformBlock from './components/Article/informBlock';
 
 class App extends React.Component {
 
-  async componentDidMount() {
+  async getData(){
     const res = await axios.get(this.props.url);
     this.props.onGetData(res.data['results']);
+    const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
+    const currentPosts = this.props.pokemons ? this.props.pokemons.slice(indexOfFirstPost, indexOfLastPost) : this.props.pokemons;
+    this.props.onGetCurrentPokemons(currentPosts);
+  }
+
+  componentDidMount() {
+    this.getData();
   }
 
   render(){
@@ -51,6 +59,9 @@ export default connect(
   state => ({
     url: state.pokemons.url,
     general: state.pokemons,
+    currentPage: state.pagination.currentPage,
+    postsPerPage: state.pagination.pokemonsPerPage,
+    pokemons: state.pokemons.pokemon,
   }),
   dispatch => ({
     onGetData: (data) => {
@@ -59,5 +70,11 @@ export default connect(
         payload: data,
       });
     },
+    onGetCurrentPokemons: (data) => {
+      dispatch({
+        type: 'GET_CURRENT_POKEMONS',
+        payload: data,
+      })
+    }
   }),
 )(App);
