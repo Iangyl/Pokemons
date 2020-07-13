@@ -11,8 +11,8 @@ class PokeList extends React.Component{
             <div className='listBox'>
                 <ul id='list'>
                     {
-                        (this.props.pokemonPerPage) ? ( 
-                            this.props.pokemonPerPage.filter(creature => creature.name.includes(this.props.searchStr.toLowerCase()))
+                        (this.props.currentPokemons) ? ( 
+                            this.props.currentPokemons.filter(creature => creature.name.includes(this.props.searchStr.toLowerCase()))
                             .map(item => {
                                 return (
                                     <PokeItems 
@@ -38,7 +38,7 @@ class PokeList extends React.Component{
 
 export default connect(
     state => ({
-        pokemonPerPage: state.pagination.currentPosts,
+        currentPokemons: state.pagination.currentPosts,
         searchStr: state.pokemons.searchWord,
     }),
     null,
