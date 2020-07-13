@@ -27,6 +27,17 @@ export default function Pagination(state = initialState, { type, payload }) {
                 ...state,
                 lastPage: payload,
             }
+        case 'RETURN_CURR_PAGE':
+            return {
+                ...state,
+                currentPage: payload,
+            }
+        case 'RETURN_DEFAULT_SETTINGS':
+            return {
+                ...state,
+                firstPage: true,
+                lastPage: false,
+            }
     }
     return state;
 }

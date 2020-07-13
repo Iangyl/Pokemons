@@ -17,6 +17,25 @@ class App extends React.Component {
     this.props.onGetCurrentPokemons(currentPosts);
   }
 
+  componentDidUpdate(){
+    if (this.props.searchControl){
+      //якщо в інпут шось написали запускаємо перерахування(щоб вивести з пагінацією потрібні результати)
+      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
+      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
+      const currentPosts = this.props.searchedArray ? this.props.searchedArray.slice(indexOfFirstPost, indexOfLastPost) : this.props.searchedArray;
+      this.props.onGetCurrentPokemons(currentPosts);
+    }
+    else{
+      //якщо нічого не записали або пуста стрічка - вертаємо все назад
+      this.props.onReturnCurrentPage(1);
+      this.props.onReturnDefaultPaginationSettings();
+      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
+      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
+      const currentPosts = this.props.pokemons ? this.props.pokemons.slice(indexOfFirstPost, indexOfLastPost) : this.props.pokemons;
+      this.props.onGetCurrentPokemons(currentPosts);
+    }
+  }
+
   componentDidMount() {
     this.getData();
   }
@@ -61,6 +80,8 @@ export default connect(
     currentPage: state.pagination.currentPage,
     postsPerPage: state.pagination.pokemonsPerPage,
     pokemons: state.pokemons.pokemon,
+    searchControl: state.search.searchOn,
+    searchedArray: state.search.searchedArr,
   }),
   dispatch => ({
     onGetData: (data) => {
@@ -73,6 +94,17 @@ export default connect(
       dispatch({
         type: 'GET_CURRENT_POKEMONS',
         payload: data,
+      })
+    },
+    onReturnCurrentPage: (data) => {
+      dispatch({
+        type: 'RETURN_CURR_PAGE',
+        payload: data,
+      })
+    },
+    onReturnDefaultPaginationSettings: () => {
+      dispatch({
+        type: 'RETURN_DEFAULT_SETTINGS',
       })
     }
   }),
