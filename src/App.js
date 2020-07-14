@@ -6,6 +6,7 @@ import axios from 'axios';
 import SearchInput from './components/Search/searchInput';
 import PokeList from './components/List/pokeList';
 import InformBlock from './components/Article/informBlock';
+import Filter from './components/Filter/filter';
 
 class App extends React.Component {
   async getData(){
@@ -50,6 +51,7 @@ class App extends React.Component {
           <div className='section'>
             <div className='nav'>
               <div className='searchContainer'>
+                <Filter />
                 <SearchInput />
               </div>
               <PokeList />

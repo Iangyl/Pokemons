@@ -26,15 +26,6 @@ class InformBlock extends React.Component{
         hatchSteps: '',
     };
 
-   /*  static getDerivedStateFromProps = () => {
-        console.log("willUpdate");
-        console.log(typeof this.props.pokeCreatureUrl);
-        const pokemonUrl = this.props.pokeCreatureUrl;
-        const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${this.props.pokeCreatureIndex}/`;
-
-        this.setState({pokemonUrl, pokemonSpeciesUrl});
-        console.log("willUpdate");
-    } */
     componentDidUpdate(prevProps) {
         if (this.props.pokeCreatureUrl !== prevProps.pokeCreatureUrl) {
             this.getPokemonInfo();
