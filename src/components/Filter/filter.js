@@ -53,8 +53,8 @@ class Filter extends React.Component{
                     } else if (selectedItemsLength > 1) {
                         selectedNames = selectedItemsLength.toString() + ' selected...'
                     }
-                    if (selectedItems === []) this.props.onSelectedCheck(false); 
                     this.props.onSelectedGet(selectedItems);
+                    if (selectedItems.length === 0) this.props.onSelectedCheck(false); 
                     this.setState({ selectedNames })
                 }}
             >

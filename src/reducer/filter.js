@@ -19,6 +19,11 @@ export default function Filter (state = initialState, {type, payload}){
                 ...state,
                 selected: payload,
             }
+        case 'FILTER_CONTROL':
+            return {
+                ...state,
+                filterOn: payload,
+            } 
     }
     return state;
 }
