@@ -23,7 +23,7 @@ export default function Filter (state = initialState, {type, payload}){
             return {
                 ...state,
                 filterOn: payload,
-            } 
+            }
+        default: return state; 
     }
-    return state;
 }

@@ -16,18 +16,16 @@ export default function Pokemons(state = initialState, {type, payload}){
         case 'GET_DATA':
             return {
                 ...state,
-                pokemon: payload.map(item => { item.id = uuid(); return item}),
+                pokemon: payload.map(item => { 
+                    item.id = uuid(); 
+                    return item
+                }),
             }
         case 'POKEMON_DEV_INF':
             return {
                 ...state,
                 pokemonBlock: payload,
             }
-        /* case 'GET_SEARCH_STRING':
-            return {
-                ...state,
-                searchWord: payload,
-            } */
     }
     return state;
 }
