@@ -12,6 +12,19 @@ class App extends React.Component {
   async getData(){
     const res = await axios.get(this.props.url);
     this.props.onGetData(res.data['results']);
+
+    const newPokeArr = await Promise.all(
+      this.props.pokemons.map(async (creature) => {
+        const resource = await axios.get(creature.url);
+        const types = resource.data.types.map((type) => type.type.name);
+        return {
+          ...creature,
+          types,
+        };
+      })
+    );
+    this.props.onGetData(newPokeArr); 
+    
     const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
     const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
     const currentPosts = this.props.pokemons ? this.props.pokemons.slice(indexOfFirstPost, indexOfLastPost) : this.props.pokemons;
@@ -108,6 +121,6 @@ export default connect(
       dispatch({
         type: 'RETURN_DEFAULT_SETTINGS',
       })
-    }
+    },
   }),
 )(App);
