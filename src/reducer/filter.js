@@ -5,6 +5,7 @@ const initialState = {
         .map(label => ({ label, value: label })),
     selected: [],
     filterOn: false,
+    filteredPokeArr: [],
 }
 
 export default function Filter (state = initialState, {type, payload}){
@@ -23,6 +24,11 @@ export default function Filter (state = initialState, {type, payload}){
             return {
                 ...state,
                 filterOn: payload,
+            }
+        case 'GET_FILTERED_ARRAY':
+            return {
+                ...state,
+                filteredPokeArr: payload,
             }
         default: return state; 
     }

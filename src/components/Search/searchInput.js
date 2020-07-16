@@ -12,8 +12,15 @@ class SearchInput extends React.Component{
         //контролювати пошук буду шляхом булівського значення, яке також буде знаходитись в store
         if (this.state.search !== '' && this.state.search) this.props.onSearchControl(true);
         else this.props.onSearchControl(false);
-        const searchArr = this.props.pokemons.filter(creature => creature.name.includes(this.state.search.toLowerCase()));
-        this.props.onGetSearchArray(searchArr);
+
+        if (this.props.filterControl) {
+            const searchArr = this.props.filteredArr.filter(creature => creature.name.includes(this.state.search.toLowerCase()));
+            this.props.onGetSearchArray(searchArr);
+        }
+        else {
+            const searchArr = this.props.pokemons.filter(creature => creature.name.includes(this.state.search.toLowerCase()));
+            this.props.onGetSearchArray(searchArr);
+        }
     }
 
     onDebounceSearch = _.debounce(this.handleSearch, 1000)
@@ -32,6 +39,8 @@ class SearchInput extends React.Component{
 export default connect(
     state => ({
         pokemons: state.pokemons.pokemon,
+        filterControl: state.filter.filterOn,
+        filteredArr: state.filter.filteredPokeArr,
     }),
     dispatch => ({
         onGetSearchArray: (data) => {

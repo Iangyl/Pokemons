@@ -26,6 +26,6 @@ export default function Pokemons(state = initialState, {type, payload}){
                 ...state,
                 pokemonBlock: payload,
             }
+        default: return state;
     }
-    return state;
 }

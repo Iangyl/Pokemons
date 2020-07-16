@@ -38,6 +38,6 @@ export default function Pagination(state = initialState, { type, payload }) {
                 firstPage: true,
                 lastPage: false,
             }
+        default: return state;
     }
-    return state;
 }

@@ -15,6 +15,6 @@ export default function Pagination(state = initialState, { type, payload }) {
                 ...state,
                 searchOn: payload,
             }
+        default: return state;
     }
-    return state;
 }
