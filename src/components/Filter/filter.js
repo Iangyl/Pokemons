@@ -31,7 +31,7 @@ class Filter extends React.Component{
                     } else if (selectedItemsLength === 1) {
                         selectedNames = selectedItems.toString()
                     } else if (selectedItemsLength > 1) {
-                        selectedNames = selectedItemsLength.toString() + ' selected...'
+                        selectedNames = selectedItemsLength.toString() + ''
                     }
                     this.props.onSelectedCheck(true);
                     this.props.onSelectedGet(selected);
@@ -51,7 +51,7 @@ class Filter extends React.Component{
                     } else if (selectedItemsLength === 1) {
                         selectedNames = selectedItems.toString()
                     } else if (selectedItemsLength > 1) {
-                        selectedNames = selectedItemsLength.toString() + ' selected...'
+                        selectedNames = selectedItemsLength.toString() + ''
                     }
                     this.props.onSelectedGet(selectedItems);
                     if (selectedItems.length === 0) this.props.onSelectedCheck(false); 
