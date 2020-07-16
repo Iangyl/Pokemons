@@ -2,7 +2,7 @@
     overflow: hidden;
     background-image: url(./assets/pictures/pokemons-bg-big1-reforged.jpg);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-attachment: fixed;
 }
 .content{
@@ -17,7 +17,7 @@
     background-color: #fe9000;
     div{
         color: white;
-        font-family: 'Roboto';
+        font-family: "Mandy's Sketch";
         font-weight: 500;
         font-size: 20pt;
         padding: 20px;
@@ -26,6 +26,8 @@
 .section{
     display: flex;
     .nav{
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: 400px;
     }
@@ -36,15 +38,20 @@
 }
 .searchContainer{
     display: flex;
-    background-color: #c200fb;
     align-items: center;
+    background-color: #c200fb;
+    text-align: center;
+    height: 55px;
+    max-width: 400px;
+    width: 100%;
 }
 .footer{
     background-color: #F4B393;
     display: flex;
+    margin-bottom: 146px;
     .foot-1{
         width: 50%;
-        margin-top: 28px;
+        padding-top: 28px;
         .soc-logo{
             width: 32px;
             height: auto;
@@ -54,15 +61,22 @@
     .foot-2{
         width: 50%;
         color: white;
-        font-family: 'Roboto';
+        font-family: "Mandy's Sketch";
         font-weight: 400;
         font-size: 16pt;
         div{
             float: right;
-            margin: 10px 20px 10px 20px;
+            
             #foot-logo{
                 width: 64px;
                 height: auto;
+                margin: 10px 20px 10px 20px;
+            }
+        }
+        #footer-text{
+            margin-top: 25px;
+            p{
+                margin: 0;
             }
         }
     }

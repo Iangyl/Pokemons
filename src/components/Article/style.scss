@@ -1,0 +1,58 @@
+@mixin commonText(){
+    font-family: "Mandy's Sketch";
+    font-size: 14pt;
+    font-weight: 400;
+}
+p{
+    margin: 0;
+}
+.title-blc{
+    text-align: center;
+    h1{
+        font-family: "Mandy's Sketch";
+        margin: 0;
+        margin-top: 100px;
+        font-size: 32pt;
+    }
+}
+.img-blc{
+    margin-top: 100px;
+    text-align: center;
+}
+.img-main{
+    width: 250px;
+}
+.block-type{
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 12pt;
+    font-weight: 500;
+    color: white;
+    padding: 14px;
+    .item-type{
+        padding: 14px;
+        background-color: black;
+        border-radius: 50px;
+        margin-left: 12px;
+    }
+}
+.stats-blc{
+    margin-top: 40px;
+    margin-left: 35px;
+    font-family: "Mandy's Sketch";
+    .stats-text{
+        margin-left: 35px;
+        font-size: 14pt;
+    }
+    small{
+        font-size: 10pt;
+    }
+}
+.desc-blc{
+    @include commonText();
+    padding: 18px;
+    margin: 0;
+}
+div{
+    font-family: "Mandy's Sketch";
+}

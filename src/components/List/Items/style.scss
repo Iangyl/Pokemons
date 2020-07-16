@@ -1,0 +1,22 @@
+li{
+    background-color: #ffde4a;
+    display: flex;
+    width: 100%;
+    padding: 20px 0 20px 15px;
+    .img-box{
+        img{
+            width: 72px;
+        }
+    }
+    .name-box{
+        font-family: "Mandy's Sketch";
+        font-size: 14pt;
+        align-self: center;
+        width: auto;
+        margin-left: 10px;
+    }
+    &:hover{
+        background-color: #ffde4a8e;
+        cursor: pointer;
+    }
+}
