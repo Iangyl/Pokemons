@@ -13,6 +13,7 @@ class App extends React.Component {
     super();
     this.state = {
       searchState: false,
+      filterState: false,
     }
   }
   async getData(){
@@ -39,37 +40,60 @@ class App extends React.Component {
   }
 
   reCount(pokemons){
-    if (this.props.searchControl) {
-      //якщо в інпут шось написали запускаємо перерахування(щоб вивести з пагінацією потрібні результати)
+    console.log('filter control', pokemons);
+    const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
+    const currentPosts = pokemons ? pokemons.slice(indexOfFirstPost, indexOfLastPost) : pokemons;
+    console.log('currPosts ', currentPosts);
 
+    this.props.onGetCurrentPokemons(currentPosts);
+  }
+
+  filtering(data){
+    console.log('filtering');
+    if (this.state.filterState === false){
+      const newFilteredArr = (data) ? (
+        data.filter(creature => {
+          const selectedArr = this.props.selectedTypes;
+          for (let i = 0; i < creature.types.length; i++) {
+            for (let j = 0; j < selectedArr.length; j++) {
+              if (creature.types[i] === selectedArr[j]) {
+                return creature;
+              }
+            }
+          }
+        })
+      ) : data;
+      this.props.onNewFilteredArr(newFilteredArr);
+      this.setState({filterState: true});
+    }
+  }
+
+  checkingOnFilterOrSearch(){
+    if (this.props.searchControl) {
       if (this.state.searchState === false) this.setState({ searchState: true });
 
-      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
-      const currentPosts = this.props.searchedArray ? this.props.searchedArray.slice(indexOfFirstPost, indexOfLastPost) : this.props.searchedArray;
-
-      this.props.onGetCurrentPokemons(currentPosts);
-    }
-    else {
-      //якщо нічого не записали або пуста стрічка - вертаємо все назад
-
-      if (this.state.searchState === true) {
-        this.props.onReturnCurrentPage(1);
-        this.props.onReturnDefaultPaginationSettings();
-
-        this.setState({ searchState: false });
+      if (this.props.filterControl) {
+        if (this.state.filterState === true) this.setState({ filterState: false });
+        console.log(this.props.searchedArray);
+        this.filtering(this.props.searchedArray);//filtering doesn`t work because filterState = true, if would be false - infinity loop
+        this.reCount(this.props.filteredArr);
       }
-      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
-      const currentPosts = pokemons ? pokemons.slice(indexOfFirstPost, indexOfLastPost) : pokemons;
+      else {
+        this.reCount(this.props.searchedArray);
+      }
 
-      this.props.onGetCurrentPokemons(currentPosts);
+    }
+    else{
+      this.filtering(this.props.pokemons);
+      this.reCount(this.props.filteredArr);
     }
   }
 
   componentDidUpdate(){
-    if (this.props.filterControl){
-      const newFilteredArr = this.props.pokemons.filter(creature => {
+    if (this.props.filterControl || this.props.searchControl){
+      this.checkingOnFilterOrSearch();
+      /* const newFilteredArr = this.props.pokemons.filter(creature => {
         const selectedArr = this.props.selectedTypes;
         for (let i = 0; i < creature.types.length; i++){
           for (let j = 0; j < selectedArr.length; j++){
@@ -80,9 +104,16 @@ class App extends React.Component {
         }
       });
       this.props.onNewFilteredArr(newFilteredArr);
-      this.reCount(newFilteredArr);
+      this.reCount(newFilteredArr); */
     }
     else{
+      if (this.state.searchState === true) {
+        this.props.onReturnCurrentPage(1);
+        this.props.onReturnDefaultPaginationSettings();
+
+        this.setState({ searchState: false });
+      }
+      if (this.state.filterState === true) this.setState({ filterState: false });
       this.reCount(this.props.pokemons);
     }
   }
@@ -136,6 +167,7 @@ export default connect(
     searchedArray: state.search.searchedArr,
     filterControl: state.filter.filterOn,
     selectedTypes: state.filter.selected,
+    filteredArr: state.filter.filteredPokeArr,
   }),
   dispatch => ({
     onGetData: (data) => {
