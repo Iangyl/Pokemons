@@ -16,6 +16,7 @@ class SearchInput extends React.Component{
         if (this.props.filterControl) {
             const searchArr = this.props.filteredArr.filter(creature => creature.name.includes(this.state.search.toLowerCase()));
             this.props.onGetSearchArray(searchArr);
+            this.props.onFilterUpdateCtrl(false);
         }
         else {
             const searchArr = this.props.pokemons.filter(creature => creature.name.includes(this.state.search.toLowerCase()));
@@ -52,6 +53,12 @@ export default connect(
         onSearchControl: (data) => {
             dispatch({
                 type: 'SEARCH_CONTROL',
+                payload: data,
+            })
+        },
+        onFilterUpdateCtrl: (data) => {
+            dispatch({
+                type: 'GET_FILTER_UPDATE_CONTROL',
                 payload: data,
             })
         }

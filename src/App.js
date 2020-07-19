@@ -13,7 +13,6 @@ class App extends React.Component {
     super();
     this.state = {
       searchState: false,
-      filterState: false,
     }
   }
   async getData(){
@@ -51,7 +50,7 @@ class App extends React.Component {
 
   filtering(data){
     console.log('filtering');
-    if (this.state.filterState === false){
+    if (this.props.filterState === false){
       const newFilteredArr = (data) ? (
         data.filter(creature => {
           const selectedArr = this.props.selectedTypes;
@@ -65,7 +64,7 @@ class App extends React.Component {
         })
       ) : data;
       this.props.onNewFilteredArr(newFilteredArr);
-      this.setState({filterState: true});
+      this.props.onFilterUpdateCtrl(true);
     }
   }
 
@@ -74,9 +73,8 @@ class App extends React.Component {
       if (this.state.searchState === false) this.setState({ searchState: true });
 
       if (this.props.filterControl) {
-        if (this.state.filterState === true) this.setState({ filterState: false });
         console.log(this.props.searchedArray);
-        this.filtering(this.props.searchedArray);//filtering doesn`t work because filterState = true, if would be false - infinity loop
+        this.filtering(this.props.searchedArray);
         this.reCount(this.props.filteredArr);
       }
       else {
@@ -93,18 +91,6 @@ class App extends React.Component {
   componentDidUpdate(){
     if (this.props.filterControl || this.props.searchControl){
       this.checkingOnFilterOrSearch();
-      /* const newFilteredArr = this.props.pokemons.filter(creature => {
-        const selectedArr = this.props.selectedTypes;
-        for (let i = 0; i < creature.types.length; i++){
-          for (let j = 0; j < selectedArr.length; j++){
-            if (creature.types[i] === selectedArr[j]) {
-              return creature;
-            }
-          }
-        }
-      });
-      this.props.onNewFilteredArr(newFilteredArr);
-      this.reCount(newFilteredArr); */
     }
     else{
       if (this.state.searchState === true) {
@@ -113,7 +99,7 @@ class App extends React.Component {
 
         this.setState({ searchState: false });
       }
-      if (this.state.filterState === true) this.setState({ filterState: false });
+      if (this.props.filterState === true) this.props.onFilterUpdateCtrl(false);
       this.reCount(this.props.pokemons);
     }
   }
@@ -168,6 +154,7 @@ export default connect(
     filterControl: state.filter.filterOn,
     selectedTypes: state.filter.selected,
     filteredArr: state.filter.filteredPokeArr,
+    filterState: state.filter.filterUpdateCtrl,
   }),
   dispatch => ({
     onGetData: (data) => {
@@ -196,6 +183,12 @@ export default connect(
     onNewFilteredArr: (data) => {
       dispatch({
         type: 'GET_FILTERED_ARRAY',
+        payload: data,
+      })
+    },
+    onFilterUpdateCtrl: (data) => {
+      dispatch({
+        type: 'GET_FILTER_UPDATE_CONTROL',
         payload: data,
       })
     }

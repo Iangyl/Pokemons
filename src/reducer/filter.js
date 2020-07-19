@@ -5,6 +5,7 @@ const initialState = {
         .map(label => ({ label, value: label })),
     selected: [],
     filterOn: false,
+    filterUpdateCtrl: false,
     filteredPokeArr: [],
 }
 
@@ -29,6 +30,11 @@ export default function Filter (state = initialState, {type, payload}){
             return {
                 ...state,
                 filteredPokeArr: payload,
+            }
+        case 'GET_FILTER_UPDATE_CONTROL':
+            return {
+                ...state,
+                filterUpdateCtrl: payload,
             }
         default: return state; 
     }
