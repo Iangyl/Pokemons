@@ -11,7 +11,10 @@ class PokeList extends React.Component{
             <div className='listBox'>
                 <ul id='list'>
                     {
-                        (this.props.currentPokemons) ? ( 
+                        (!this.props.currentPokemons || this.props.currentPokemons.length === 0) ? ( 
+                            <li key='1'>There are no such pokemons.</li>
+                        ) : (
+                            
                             this.props.currentPokemons
                             .map(item => {
                                 return (
@@ -22,11 +25,6 @@ class PokeList extends React.Component{
                                     />
                                 );
                             })
-                        ) : (
-                            <PokeItems 
-                                key={'1'}
-                                name={'Loading...'}
-                            />
                         )
                    }
                 </ul>

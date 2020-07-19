@@ -39,50 +39,67 @@ class App extends React.Component {
   }
 
   reCount(pokemons){
-    if (this.props.searchControl) {
-      //якщо в інпут шось написали запускаємо перерахування(щоб вивести з пагінацією потрібні результати)
+    console.log('filter control', pokemons);
+    const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
+    const currentPosts = pokemons ? pokemons.slice(indexOfFirstPost, indexOfLastPost) : pokemons;
+    console.log('currPosts ', currentPosts);
 
+    this.props.onGetCurrentPokemons(currentPosts);
+  }
+
+  filtering(data){
+    console.log('filtering');
+    if (this.props.filterState === false){
+      const newFilteredArr = (data) ? (
+        data.filter(creature => {
+          const selectedArr = this.props.selectedTypes;
+          for (let i = 0; i < creature.types.length; i++) {
+            for (let j = 0; j < selectedArr.length; j++) {
+              if (creature.types[i] === selectedArr[j]) {
+                return creature;
+              }
+            }
+          }
+        })
+      ) : data;
+      this.props.onNewFilteredArr(newFilteredArr);
+      this.props.onFilterUpdateCtrl(true);
+    }
+  }
+
+  checkingOnFilterOrSearch(){
+    if (this.props.searchControl) {
       if (this.state.searchState === false) this.setState({ searchState: true });
 
-      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
-      const currentPosts = this.props.searchedArray ? this.props.searchedArray.slice(indexOfFirstPost, indexOfLastPost) : this.props.searchedArray;
+      if (this.props.filterControl) {
+        console.log(this.props.searchedArray);
+        this.filtering(this.props.searchedArray);
+        this.reCount(this.props.filteredArr);
+      }
+      else {
+        this.reCount(this.props.searchedArray);
+      }
 
-      this.props.onGetCurrentPokemons(currentPosts);
     }
-    else {
-      //якщо нічого не записали або пуста стрічка - вертаємо все назад
+    else{
+      this.filtering(this.props.pokemons);
+      this.reCount(this.props.filteredArr);
+    }
+  }
 
+  componentDidUpdate(){
+    if (this.props.filterControl || this.props.searchControl){
+      this.checkingOnFilterOrSearch();
+    }
+    else{
       if (this.state.searchState === true) {
         this.props.onReturnCurrentPage(1);
         this.props.onReturnDefaultPaginationSettings();
 
         this.setState({ searchState: false });
       }
-      const indexOfLastPost = this.props.currentPage * this.props.postsPerPage;
-      const indexOfFirstPost = indexOfLastPost - this.props.postsPerPage;
-      const currentPosts = pokemons ? pokemons.slice(indexOfFirstPost, indexOfLastPost) : pokemons;
-
-      this.props.onGetCurrentPokemons(currentPosts);
-    }
-  }
-
-  componentDidUpdate(){
-    if (this.props.filterControl){
-      const newFilteredArr = this.props.pokemons.filter(creature => {
-        const selectedArr = this.props.selectedTypes;
-        for (let i = 0; i < creature.types.length; i++){
-          for (let j = 0; j < selectedArr.length; j++){
-            if (creature.types[i] === selectedArr[j]) {
-              return creature;
-            }
-          }
-        }
-      });
-      this.props.onNewFilteredArr(newFilteredArr);
-      this.reCount(newFilteredArr);
-    }
-    else{
+      if (this.props.filterState === true) this.props.onFilterUpdateCtrl(false);
       this.reCount(this.props.pokemons);
     }
   }
@@ -136,6 +153,8 @@ export default connect(
     searchedArray: state.search.searchedArr,
     filterControl: state.filter.filterOn,
     selectedTypes: state.filter.selected,
+    filteredArr: state.filter.filteredPokeArr,
+    filterState: state.filter.filterUpdateCtrl,
   }),
   dispatch => ({
     onGetData: (data) => {
@@ -164,6 +183,12 @@ export default connect(
     onNewFilteredArr: (data) => {
       dispatch({
         type: 'GET_FILTERED_ARRAY',
+        payload: data,
+      })
+    },
+    onFilterUpdateCtrl: (data) => {
+      dispatch({
+        type: 'GET_FILTER_UPDATE_CONTROL',
         payload: data,
       })
     }
