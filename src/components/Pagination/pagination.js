@@ -9,12 +9,13 @@ class Pagination extends React.Component{
         const nextPage = currPage + 1;
         this.props.onChangePage(nextPage);
         this.props.onFirstCheckPage(false);
+        if ((nextPage + 1) === 109) this.props.onLastCheckPage(true);
     }
     prevPage = () => {
         const prevPage = this.props.currentPage - 1;
         this.props.onChangePage(prevPage);
         if((prevPage - 1) === 0) this.props.onFirstCheckPage(true);
-        if((prevPage + 1) === 108) this.props.onLastCheckPage(true);
+        if((prevPage + 1) === 108) this.props.onLastCheckPage(false);
     }
     startPage = () => {
         this.props.onChangePage(1);
